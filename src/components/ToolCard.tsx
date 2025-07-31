@@ -23,17 +23,17 @@ export const ToolCard = ({ tool, showDelete = false, onDelete }: ToolCardProps) 
   };
 
   return (
-    <div className="group bg-card border border-border rounded-lg p-5 transition-smooth hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
+    <div className="group bg-card border border-border rounded-xl p-6 transition-smooth hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10">
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-muted rounded-lg flex items-center justify-center overflow-hidden">
+          <div className="flex items-center space-x-4">
+            <div className="w-14 h-14 bg-muted rounded-xl flex items-center justify-center overflow-hidden">
               {tool.iconURL ? (
                 <img 
                   src={tool.iconURL} 
                   alt={`${tool.name} icon`}
-                  className="w-8 h-8 object-cover filter brightness-0 invert"
+                  className="w-9 h-9 object-cover filter brightness-0 invert"
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     const sibling = target.nextElementSibling as HTMLElement;
@@ -42,17 +42,17 @@ export const ToolCard = ({ tool, showDelete = false, onDelete }: ToolCardProps) 
                   }}
                 />
               ) : null}
-              <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
+              <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-mono text-sm font-bold">
                   {tool.name[0].toUpperCase()}
                 </span>
               </div>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-foreground text-lg leading-tight">
+              <h3 className="font-medium text-foreground text-lg leading-tight">
                 {tool.name}
               </h3>
-              <span className="inline-block px-2 py-1 mt-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+              <span className="inline-block px-3 py-1 mt-2 text-xs font-medium bg-primary/10 text-primary rounded-full">
                 {tool.type}
               </span>
             </div>

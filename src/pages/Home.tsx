@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { ToolCard, Tool } from "@/components/ToolCard";
 import { Search, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 const mockTools: Tool[] = [
@@ -58,7 +57,7 @@ const mockTools: Tool[] = [
 export const Home = () => {
   const [tools, setTools] = useState<Tool[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedType, setSelectedType] = useState<string>("all");
+  
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -77,8 +76,7 @@ export const Home = () => {
   const filteredTools = tools.filter(tool => {
     const matchesSearch = tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          tool.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesType = selectedType === "all" || tool.type === selectedType;
-    return matchesSearch && matchesType;
+    return matchesSearch;
   });
 
   const LoadingSkeleton = () => (
@@ -104,21 +102,10 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
-            Explore Community
-            <span className="text-primary ml-3">Tools</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Discover the best software, plugins, and scripts submitted by our community
-          </p>
-        </div>
-
-        {/* Search and Filter */}
-        <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-3xl mx-auto">
-          <div className="relative flex-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Search Section */}
+        <div className="mb-8">
+          <div className="relative max-w-2xl mx-auto">
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
             <Input
               placeholder="Search tools..."
@@ -127,26 +114,14 @@ export const Home = () => {
               className="pl-12 h-12 bg-card border-border"
             />
           </div>
-          <div className="flex gap-2">
-            {["all", "software", "plugin", "script"].map((type) => (
-              <Button
-                key={type}
-                variant={selectedType === type ? "default" : "ghost"}
-                onClick={() => setSelectedType(type)}
-                className="capitalize"
-              >
-                {type}
-              </Button>
-            ))}
-          </div>
         </div>
 
         {/* Tools Grid */}
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Featured Tools
-              <span className="text-muted-foreground text-lg font-normal ml-2">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-medium text-foreground">
+              Community Tools
+              <span className="text-muted-foreground text-xl font-normal ml-3">
                 ({filteredTools.length})
               </span>
             </h2>
@@ -155,7 +130,7 @@ export const Home = () => {
           {isLoading ? (
             <LoadingSkeleton />
           ) : filteredTools.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredTools.map((tool) => (
                 <ToolCard key={tool.id} tool={tool} />
               ))}

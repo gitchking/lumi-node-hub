@@ -25,9 +25,9 @@ export const Navbar = ({ isLoggedIn = false, onLogin, onLogout }: NavbarProps) =
           <div className="flex items-center">
             <a href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-sm font-mono font-bold text-primary-foreground">T</span>
+                <span className="text-sm font-mono font-bold text-primary-foreground">LM</span>
               </div>
-              <span className="font-mono text-xl font-semibold text-foreground">Toolify</span>
+              <span className="font-mono text-xl font-semibold text-foreground">Leak Media</span>
             </a>
           </div>
 
@@ -80,8 +80,8 @@ export const Navbar = ({ isLoggedIn = false, onLogin, onLogout }: NavbarProps) =
                 </DropdownMenu>
               </>
             ) : (
-              <Button variant="outline" onClick={onLogin}>
-                Login with Google
+              <Button variant="minimal" onClick={onLogin}>
+                Login
               </Button>
             )}
           </div>
